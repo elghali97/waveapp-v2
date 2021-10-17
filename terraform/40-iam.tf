@@ -4,8 +4,8 @@ resource "aws_iam_instance_profile" "app" {
 }
 
 resource "aws_iam_role" "container_webapp_instance_role" {
-  name               = "fr-role-${local.tags["wavestone:project"]}-${var.environment}"
-  description        = "IAM role for ${local.tags["wavestone:project"]}-${var.environment}"
+  name        = "fr-role-${local.tags["wavestone:project"]}-${var.environment}"
+  description = "IAM role for ${local.tags["wavestone:project"]}-${var.environment}"
   assume_role_policy = jsonencode(
     {
       "Version" : "2012-10-17",
@@ -22,10 +22,10 @@ resource "aws_iam_role" "container_webapp_instance_role" {
     }
   )
 
-  tags = merge(local.tags,{"Name"="fr-role-${local.tags["wavestone:project"]}-${var.environment}"})
+  tags = merge(local.tags, { "Name" = "fr-role-${local.tags["wavestone:project"]}-${var.environment}" })
 }
 
-resource "aws_iam_role_policy_attachment" "ssmcore"{
+resource "aws_iam_role_policy_attachment" "ssmcore" {
   role       = aws_iam_role.container_webapp_instance_role.name
   policy_arn = data.aws_iam_policy.ssmcore.arn
 }
@@ -60,7 +60,7 @@ resource "aws_iam_policy" "container_webapp_s3_policy" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "container_webapp_s3_policy_attachment"{
+resource "aws_iam_role_policy_attachment" "container_webapp_s3_policy_attachment" {
   role       = aws_iam_role.container_webapp_instance_role.name
   policy_arn = aws_iam_policy.container_webapp_s3_policy.arn
 }

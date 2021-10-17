@@ -1,22 +1,22 @@
 // ----------- INSTANCE AMI -----------
 data "aws_ami" "ubuntu" {
-    most_recent = true
+  most_recent = true
 
-    filter {
-        name   = "owner-alias"
-        values = ["amazon"]
-    }
+  filter {
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
 
-    filter {
-        name   = "name"
-        values = ["amzn2-ami-hvm*"]
-    }
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm*"]
+  }
 
-    owners=["amazon"]
+  owners = ["amazon"]
 }
 
 // ----------- POLICIES FOR SSM -----------
-data "aws_iam_policy" "ssmcore"{
-    arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+data "aws_iam_policy" "ssmcore" {
+  arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
